@@ -49,7 +49,7 @@
     
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped)];
     tgr.delegate = self;
-    [self.tableView addGestureRecognizer:tgr];
+//    [self.tableView addGestureRecognizer:tgr];
     
     [self.tableView setBackgroundColor:[UIColor colorWithRed:44/255.0 green:62/255.0 blue:80/255.0 alpha:1.0f]];
     
@@ -106,7 +106,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(!categorySelected) {
         //If no cell has been selected return the number of categories plus one, for the add button
-        return [categories count] + 1;
+        return [categories count] + 2;
     } else {
         //[add] Return the number of items in the selected category
         
@@ -145,6 +145,13 @@
         cell.categoryButton.hidden = YES;
         //plus button/background could be yellow because it is the most eye catching color
         
+    } else if([categories count] + 1 == indexPath.row) {
+        //Your Code/Button Here!
+        cell.mainTextView.text = @"Logout";
+        cell.mainTextView.editable = NO;
+        cell.categoryButton.hidden = YES;
+
+        cell.mainTextView.userInteractionEnabled = NO;
     } else {
         //Category cell
         cell.mainTextView.text = [categories objectAtIndex:indexPath.row];
@@ -162,6 +169,13 @@
     return self.view.frame.size.height/5;
 }
 
+-(void)logoutMethod
+{
+    NSLog(@"Logging out");
+    [PFUser logOut];
+    [self presentLoginView];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MainCellNib *cell = (MainCellNib*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setTag:indexPath.row];
@@ -169,6 +183,10 @@
         //Add button clicked
         cell.mainTextView.font = [UIFont fontWithName:@"Helvetica" size:30];
         [cell.mainTextView setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.7]];
+        NSLog(@"hmm");
+    } else if([categories count] + 1 == indexPath.row) {
+        //Add button clicked
+        [self logoutMethod];
     } else if([cell.mainTextView.text isEqualToString:[categories objectAtIndex:indexPath.row]]) {
         //Only clear the text if it is the same as the default text
         cell.mainTextView.text = @"";

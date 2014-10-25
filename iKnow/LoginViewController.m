@@ -58,7 +58,7 @@
             NSString *errorMessage = nil;
             if (!error) {
                 NSLog(@"Uh oh. The user cancelled the Facebook login.");
-                errorMessage = @"Uh oh. The user cancelled the Facebook login.";
+                errorMessage = @"Uh oh. It looks like the login failed. Make sure that Facebook is setup properly in iPhone Settings.";
             } else {
                 NSLog(@"Uh oh. An error occurred: %@", error);
                 errorMessage = [error localizedDescription];
