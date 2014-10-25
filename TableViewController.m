@@ -17,6 +17,7 @@
     NSMutableArray *categories;
     NSMutableArray *colors;
     bool categorySelected;
+    NSInteger selectedCategoryIndex;
 }
 
 - (void)viewDidLoad {
@@ -24,6 +25,7 @@
     
     categories = [[NSMutableArray alloc] init];
     colors = [[NSMutableArray alloc] init];
+    selectedCategoryIndex = 0;
     
     categorySelected = false;
     
@@ -80,7 +82,6 @@
 #pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    //Return the number of sections.
     return 1;
 }
 
@@ -92,7 +93,7 @@
         //[add] Return the number of items in the selected category
         
         //place holder
-        return 1;
+        return 3;
     }
 }
 
@@ -108,7 +109,13 @@
     [cell.mainTextView setTextAlignment:NSTextAlignmentCenter];
     cell.mainTextView.delegate = self;
     
-    if([categories count] == indexPath.row) {
+    [cell setTag:indexPath.row];
+    [cell.categoryButton setTag:indexPath.row];
+    
+    if(categorySelected) {
+        //[add] Return cells for the selected category
+        cell.categoryButton.hidden = YES;
+    } else if([categories count] == indexPath.row) {
         //Add button cell
         cell.mainTextView.text = [NSString stringWithFormat:@"+"];
         cell.mainTextView.font = [UIFont fontWithName:@"Helvetica Bold" size:40];
@@ -120,13 +127,12 @@
         cell.categoryButton.hidden = YES;
         //plus button/background could be yellow because it is the most eye catching color
         
-    } else if(!categorySelected) {
-        //Category cell
-        
-        cell.mainTextView.text = [categories objectAtIndex:indexPath.row];
-        
     } else {
-        //[add] Return cells for the selected category
+        //Category cell
+        cell.mainTextView.text = [categories objectAtIndex:indexPath.row];
+        [cell.categoryButton addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        cell.categoryButton.hidden = NO;
         
     }
     
@@ -140,6 +146,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MainCellNib *cell = (MainCellNib*)[tableView cellForRowAtIndexPath:indexPath];
+    [cell setTag:indexPath.row];
     if([categories count] == indexPath.row) {
         //Add button clicked
         cell.mainTextView.font = [UIFont fontWithName:@"Helvetica" size:30];
@@ -151,27 +158,19 @@
     }
 }
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MainCellNib *cell = (MainCellNib*)[tableView cellForRowAtIndexPath:indexPath];
-    //If the cell is deselcted without new text it shows the category
-    if([cell.mainTextView.text isEqualToString:@""]) {
-        cell.mainTextView.text = [categories objectAtIndex:indexPath.row];
-    } else {
-        //[add] Stop editing text and save
-    }
-}
-
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    //[add] move the selected cell to the top and make it a section header with a back button
-    //reload the table view with the past data from that category
-}
-
 #pragma mark - Text Saving / Mechanics
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    NSLog(@"ASD");
+    if([textView.text isEqualToString:[categories objectAtIndex:[textView tag]]]) {
+        NSLog(@"text view was not edited");
+    } else if ([[textView.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
+        NSLog(@"text view empty");
+        textView.text = [categories objectAtIndex:[textView tag]];
+    } else {
+        //save text here
+        NSLog(@"%@", textView.text);
+    }
 }
-
 
 -(void)viewTapped {
     [self.view endEditing:YES];
@@ -209,21 +208,52 @@
 
 #pragma mark - Section Header
 
-/* [add] for when a category is selected, it becomes the section header
+-(void)categoryButtonClicked:(UIButton*)sender {
+    categorySelected = true;
+    selectedCategoryIndex = [sender tag];
+    NSLog(@"%i", selectedCategoryIndex);
+    [self.tableView reloadData];
+}
+
+-(void)backButtonTapped:(UIButton*)sender {
+    categorySelected = false;
+    selectedCategoryIndex = 0;
+    [self.tableView reloadData];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if(selected) {
+    if(categorySelected) {
+        return 55;
     } else {
-    return 50;
+        return 0;
     }
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if(selected) {
+    if(categorySelected) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 40)];
+        NSString *categoryString = [categories objectAtIndex:selectedCategoryIndex];
+        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, 10, 20)];
+        [backButton addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [backButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:30]];
+        [backButton setTitle:@"<" forState:UIControlStateNormal];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, tableView.frame.size.width, 30)];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        [label setFont:[UIFont fontWithName:@"Helvetica" size:30]];
+        [label setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0]];
+        [label setText:categoryString];
+        
+        [view addSubview:label];
+        [view addSubview:backButton];
+        [view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:196/255.0 blue:15/255.0 alpha:1.0]];
+        
+        return view;
     } else {
-    return scrollViewController;
+        return nil;
     }
 }
-*/
+
 
 
 @end
