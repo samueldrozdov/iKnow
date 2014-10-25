@@ -9,6 +9,8 @@
 #import "TableViewController.h"
 #import "MainCellNib.h"
 
+#import "LoginViewController.h"
+
 @interface TableViewController ()
 
 @end
@@ -18,6 +20,22 @@
     NSMutableArray *colors;
     bool categorySelected;
     NSInteger selectedCategoryIndex;
+}
+
+- (void)presentLoginView
+{
+    LoginViewController *lvc = [[LoginViewController alloc] init];
+    [self presentViewController:lvc animated:YES completion:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if ([PFUser currentUser] &&
+        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        
+    } else {
+        [self presentLoginView];
+    }
 }
 
 - (void)viewDidLoad {

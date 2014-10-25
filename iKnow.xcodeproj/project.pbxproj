@@ -30,6 +30,14 @@
 		9F5978A219FC278E00384C5D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5978A119FC278E00384C5D /* Security.framework */; };
 		9F5978A419FC279400384C5D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5978A319FC279400384C5D /* StoreKit.framework */; };
 		9F5978A619FC279C00384C5D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5978A519FC279C00384C5D /* SystemConfiguration.framework */; };
+		9F5978AB19FC33F200384C5D /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5978A919FC33F200384C5D /* ParseFacebookUtils.framework */; };
+		9F5978AC19FC33F200384C5D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5978AA19FC33F200384C5D /* FacebookSDK.framework */; };
+		9F5978B019FC3BE900384C5D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5978AF19FC3BE900384C5D /* LoginViewController.m */; };
+		9F5978B319FC3C1000384C5D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978B219FC3C1000384C5D /* LoginViewController.xib */; };
+		9F5978BB19FC3C3E00384C5D /* login-button-small-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978B719FC3C3E00384C5D /* login-button-small-pressed.png */; };
+		9F5978BC19FC3C3E00384C5D /* login-button-small-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978B819FC3C3E00384C5D /* login-button-small-pressed@2x.png */; };
+		9F5978BD19FC3C3E00384C5D /* login-button-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978B919FC3C3E00384C5D /* login-button-small.png */; };
+		9F5978BE19FC3C3E00384C5D /* login-button-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978BA19FC3C3E00384C5D /* login-button-small@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +84,15 @@
 		9F5978A119FC278E00384C5D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9F5978A319FC279400384C5D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9F5978A519FC279C00384C5D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9F5978A919FC33F200384C5D /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		9F5978AA19FC33F200384C5D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		9F5978AE19FC3BE900384C5D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		9F5978AF19FC3BE900384C5D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		9F5978B219FC3C1000384C5D /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		9F5978B719FC3C3E00384C5D /* login-button-small-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-small-pressed.png"; sourceTree = "<group>"; };
+		9F5978B819FC3C3E00384C5D /* login-button-small-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-small-pressed@2x.png"; sourceTree = "<group>"; };
+		9F5978B919FC3C3E00384C5D /* login-button-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-small.png"; sourceTree = "<group>"; };
+		9F5978BA19FC3C3E00384C5D /* login-button-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-small@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +112,8 @@
 				9F59789419FC274600384C5D /* AudioToolbox.framework in Frameworks */,
 				9F59788F19FC246500384C5D /* Parse.framework in Frameworks */,
 				9F59789219FC272C00384C5D /* Bolts.framework in Frameworks */,
+				9F5978AB19FC33F200384C5D /* ParseFacebookUtils.framework in Frameworks */,
+				9F5978AC19FC33F200384C5D /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +130,7 @@
 		41A9181B19FB446000C4C08A = {
 			isa = PBXGroup;
 			children = (
+				9F5978B419FC3C2900384C5D /* Resources */,
 				9F59788B19FC242200384C5D /* Frameworks */,
 				41A9182619FB446000C4C08A /* iKnow */,
 				41A9184319FB446000C4C08A /* iKnowTests */,
@@ -130,6 +150,8 @@
 		41A9182619FB446000C4C08A /* iKnow */ = {
 			isa = PBXGroup;
 			children = (
+				9F5978B119FC3C0600384C5D /* Views */,
+				9F5978AD19FC3B9100384C5D /* Controllers */,
 				9F59788619FC21FB00384C5D /* Models */,
 				9F59787F19FC1E9200384C5D /* Core */,
 				41A9182B19FB446000C4C08A /* AppDelegate.h */,
@@ -229,10 +251,64 @@
 		9F5978A719FC280200384C5D /* Parse Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				9F5978A819FC33E200384C5D /* Facebook */,
 				9F59788D19FC244B00384C5D /* System Frameworks */,
 				9F59788C19FC243C00384C5D /* User Frameworks */,
 			);
 			name = "Parse Dependencies";
+			sourceTree = "<group>";
+		};
+		9F5978A819FC33E200384C5D /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				9F5978A919FC33F200384C5D /* ParseFacebookUtils.framework */,
+				9F5978AA19FC33F200384C5D /* FacebookSDK.framework */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
+		9F5978AD19FC3B9100384C5D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9F5978AE19FC3BE900384C5D /* LoginViewController.h */,
+				9F5978AF19FC3BE900384C5D /* LoginViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		9F5978B119FC3C0600384C5D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9F5978B219FC3C1000384C5D /* LoginViewController.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		9F5978B419FC3C2900384C5D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9F5978B519FC3C2E00384C5D /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		9F5978B519FC3C2E00384C5D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9F5978B619FC3C3300384C5D /* Facebook */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		9F5978B619FC3C3300384C5D /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				9F5978B719FC3C3E00384C5D /* login-button-small-pressed.png */,
+				9F5978B819FC3C3E00384C5D /* login-button-small-pressed@2x.png */,
+				9F5978B919FC3C3E00384C5D /* login-button-small.png */,
+				9F5978BA19FC3C3E00384C5D /* login-button-small@2x.png */,
+			);
+			name = Facebook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,10 +392,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F5978B319FC3C1000384C5D /* LoginViewController.xib in Resources */,
+				9F5978BC19FC3C3E00384C5D /* login-button-small-pressed@2x.png in Resources */,
 				41A9183619FB446000C4C08A /* Main.storyboard in Resources */,
 				41F9903E19FC28D9001046D1 /* MainCellNib.xib in Resources */,
 				41A9183B19FB446000C4C08A /* LaunchScreen.xib in Resources */,
 				41A9183819FB446000C4C08A /* Images.xcassets in Resources */,
+				9F5978BB19FC3C3E00384C5D /* login-button-small-pressed.png in Resources */,
+				9F5978BE19FC3C3E00384C5D /* login-button-small@2x.png in Resources */,
+				9F5978BD19FC3C3E00384C5D /* login-button-small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +421,7 @@
 				41F9904119FC28F7001046D1 /* MainCellNib.m in Sources */,
 				41A9183019FB446000C4C08A /* iKnow.xcdatamodeld in Sources */,
 				9F59788219FC1EB500384C5D /* DataManager.m in Sources */,
+				9F5978B019FC3BE900384C5D /* LoginViewController.m in Sources */,
 				41A9182D19FB446000C4C08A /* AppDelegate.m in Sources */,
 				41A9182A19FB446000C4C08A /* main.m in Sources */,
 				41A9185219FB44D600C4C08A /* TableViewController.m in Sources */,
