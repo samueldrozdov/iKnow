@@ -15,6 +15,8 @@
 		41A9183B19FB446000C4C08A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A9183919FB446000C4C08A /* LaunchScreen.xib */; };
 		41A9184719FB446000C4C08A /* iKnowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A9184619FB446000C4C08A /* iKnowTests.m */; };
 		41A9185219FB44D600C4C08A /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A9185119FB44D600C4C08A /* TableViewController.m */; };
+		41F9903E19FC28D9001046D1 /* MainCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F9903D19FC28D9001046D1 /* MainCellNib.xib */; };
+		41F9904119FC28F7001046D1 /* MainCellNib.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F9904019FC28F7001046D1 /* MainCellNib.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,9 @@
 		41A9184619FB446000C4C08A /* iKnowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iKnowTests.m; sourceTree = "<group>"; };
 		41A9185019FB44D600C4C08A /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewController.h; path = ../TableViewController.h; sourceTree = "<group>"; };
 		41A9185119FB44D600C4C08A /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewController.m; path = ../TableViewController.m; sourceTree = "<group>"; };
+		41F9903D19FC28D9001046D1 /* MainCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainCellNib.xib; sourceTree = "<group>"; };
+		41F9903F19FC28F7001046D1 /* MainCellNib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainCellNib.h; path = ../MainCellNib.h; sourceTree = "<group>"; };
+		41F9904019FC28F7001046D1 /* MainCellNib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainCellNib.m; path = ../MainCellNib.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +93,9 @@
 				41A9185019FB44D600C4C08A /* TableViewController.h */,
 				41A9185119FB44D600C4C08A /* TableViewController.m */,
 				41A9183419FB446000C4C08A /* Main.storyboard */,
+				41F9903F19FC28F7001046D1 /* MainCellNib.h */,
+				41F9904019FC28F7001046D1 /* MainCellNib.m */,
+				41F9903D19FC28D9001046D1 /* MainCellNib.xib */,
 				41A9183719FB446000C4C08A /* Images.xcassets */,
 				41A9183919FB446000C4C08A /* LaunchScreen.xib */,
 				41A9182E19FB446000C4C08A /* iKnow.xcdatamodeld */,
@@ -203,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41A9183619FB446000C4C08A /* Main.storyboard in Resources */,
+				41F9903E19FC28D9001046D1 /* MainCellNib.xib in Resources */,
 				41A9183B19FB446000C4C08A /* LaunchScreen.xib in Resources */,
 				41A9183819FB446000C4C08A /* Images.xcassets in Resources */,
 			);
@@ -222,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41F9904119FC28F7001046D1 /* MainCellNib.m in Sources */,
 				41A9183019FB446000C4C08A /* iKnow.xcdatamodeld in Sources */,
 				41A9182D19FB446000C4C08A /* AppDelegate.m in Sources */,
 				41A9182A19FB446000C4C08A /* main.m in Sources */,
@@ -416,6 +426,7 @@
 				41A9184C19FB446000C4C08A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		41A9184D19FB446000C4C08A /* Build configuration list for PBXNativeTarget "iKnowTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +435,7 @@
 				41A9184F19FB446000C4C08A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

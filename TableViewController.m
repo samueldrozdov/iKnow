@@ -7,6 +7,7 @@
 //
 
 #import "TableViewController.h"
+#import "MainCellNib.h"
 
 @interface TableViewController ()
 
@@ -43,6 +44,11 @@
     [colors addObject:color3];
     [colors addObject:color4];
     [colors addObject:color5];
+    
+    //Register the custom table view cell from its nib file
+    UINib *mainCell = [UINib nibWithNibName:@"MainCellNib" bundle:[NSBundle mainBundle]];
+    [self.tableView registerNib:mainCell forCellReuseIdentifier:@"MainCell"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 
     //use plist to store category data!? Default data would work because it could be deleted
     //default categories
@@ -89,32 +95,32 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    MainCellNib *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MainCell" forIndexPath:indexPath];
     
     [cell setBackgroundColor:[colors objectAtIndex:(indexPath.row % 6)]];
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:30];
+    [cell.mainTextView setBackgroundColor:[colors objectAtIndex:(indexPath.row % 6)]];
+    cell.mainTextView.font = [UIFont fontWithName:@"Helvetica Bold" size:30];
     //[add] resize for size of text label
     
-    [cell.textLabel setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.7]];
-    [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+    [cell.mainTextView setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.7]];
+    [cell.mainTextView setTextAlignment:NSTextAlignmentCenter];
     
     if([categories count] == indexPath.row) {
         //Add button cell
-        cell.textLabel.text = [NSString stringWithFormat:@"+"];
-        cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:40];
+        cell.mainTextView.text = [NSString stringWithFormat:@"+"];
+        cell.mainTextView.font = [UIFont fontWithName:@"Helvetica Bold" size:40];
         [cell setBackgroundColor:[UIColor colorWithRed:149/255.0 green:165/255.0 blue:166/255.0 alpha:1.0]];
-        [cell.textLabel setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];
+        [cell.mainTextView setBackgroundColor:[UIColor colorWithRed:149/255.0 green:165/255.0 blue:166/255.0 alpha:1.0]];
+        [cell.mainTextView setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];
+        cell.mainTextView.userInteractionEnabled = NO;
         
+        cell.categoryButton.hidden = YES;
         //plus button/background could be yellow because it is the most eye catching color
         
     } else if(!categorySelected) {
         //Category cell
         
-        //Add a tag to the cell that stores the row so we know what row when an accessory view is clicked
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-        [cell.accessoryView setTag:indexPath.row];
-        
-        cell.textLabel.text = [categories objectAtIndex:indexPath.row];
+        cell.mainTextView.text = [categories objectAtIndex:indexPath.row];
         
     } else {
         //[add] Return cells for the selected category
@@ -192,7 +198,7 @@
 
 #pragma mark - Section Header
 
-/* [add]
+/* [add] for when a category is selected, it becomes the section header
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if(selected) {
     } else {
