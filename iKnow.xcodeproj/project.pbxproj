@@ -10,11 +10,11 @@
 		41A9182A19FB446000C4C08A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A9182919FB446000C4C08A /* main.m */; };
 		41A9182D19FB446000C4C08A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A9182C19FB446000C4C08A /* AppDelegate.m */; };
 		41A9183019FB446000C4C08A /* iKnow.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41A9182E19FB446000C4C08A /* iKnow.xcdatamodeld */; };
-		41A9183319FB446000C4C08A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A9183219FB446000C4C08A /* ViewController.m */; };
 		41A9183619FB446000C4C08A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41A9183419FB446000C4C08A /* Main.storyboard */; };
 		41A9183819FB446000C4C08A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41A9183719FB446000C4C08A /* Images.xcassets */; };
 		41A9183B19FB446000C4C08A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A9183919FB446000C4C08A /* LaunchScreen.xib */; };
 		41A9184719FB446000C4C08A /* iKnowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A9184619FB446000C4C08A /* iKnowTests.m */; };
+		41A9185219FB44D600C4C08A /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A9185119FB44D600C4C08A /* TableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,14 +34,14 @@
 		41A9182B19FB446000C4C08A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		41A9182C19FB446000C4C08A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		41A9182F19FB446000C4C08A /* iKnow.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iKnow.xcdatamodel; sourceTree = "<group>"; };
-		41A9183119FB446000C4C08A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		41A9183219FB446000C4C08A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		41A9183519FB446000C4C08A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		41A9183719FB446000C4C08A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		41A9183A19FB446000C4C08A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		41A9184019FB446000C4C08A /* iKnowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iKnowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41A9184519FB446000C4C08A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41A9184619FB446000C4C08A /* iKnowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iKnowTests.m; sourceTree = "<group>"; };
+		41A9185019FB44D600C4C08A /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewController.h; path = ../TableViewController.h; sourceTree = "<group>"; };
+		41A9185119FB44D600C4C08A /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewController.m; path = ../TableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +85,8 @@
 			children = (
 				41A9182B19FB446000C4C08A /* AppDelegate.h */,
 				41A9182C19FB446000C4C08A /* AppDelegate.m */,
-				41A9183119FB446000C4C08A /* ViewController.h */,
-				41A9183219FB446000C4C08A /* ViewController.m */,
+				41A9185019FB44D600C4C08A /* TableViewController.h */,
+				41A9185119FB44D600C4C08A /* TableViewController.m */,
 				41A9183419FB446000C4C08A /* Main.storyboard */,
 				41A9183719FB446000C4C08A /* Images.xcassets */,
 				41A9183919FB446000C4C08A /* LaunchScreen.xib */,
@@ -224,8 +224,8 @@
 			files = (
 				41A9183019FB446000C4C08A /* iKnow.xcdatamodeld in Sources */,
 				41A9182D19FB446000C4C08A /* AppDelegate.m in Sources */,
-				41A9183319FB446000C4C08A /* ViewController.m in Sources */,
 				41A9182A19FB446000C4C08A /* main.m in Sources */,
+				41A9185219FB44D600C4C08A /* TableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

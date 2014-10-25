@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TableViewController.h
 //  iKnow
 //
 //  Created by Samuel Drozdov on 10/24/14.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface TableViewController : UITableViewController
 
 @end
-
