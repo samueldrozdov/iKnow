@@ -9,6 +9,9 @@
 #ifndef iKnow_DataConstants_h
 #define iKnow_DataConstants_h
 
+// Post
 static NSString * const IKPost = @"Post";
+static NSString * const IKPostCategory = @"Category";
+static NSString * const IKPostContent = @"Content";
 
 #endif // iKnow_DataConstants_h

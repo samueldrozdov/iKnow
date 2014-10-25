@@ -12,5 +12,6 @@
 
 + (instancetype)sharedManager;
 - (void)postData:(NSDictionary*)data withBlock:(void (^)(NSError *err, NSString *objectId))callback;
+- (void)queryPostsWithCategory:(NSString*)category withBlock:(void (^)(NSError *err, NSArray *objects))callback;
 
 @end
