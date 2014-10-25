@@ -7,27 +7,18 @@
         <!--iKnow-->
         <scene sceneID="IoN-Bq-pUJ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1ka-9I-aHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController title="iKnow" id="jKg-7o-MNk" customClass="TableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="129" sectionHeaderHeight="22" sectionFooterHeight="22" id="BbA-1C-JyK">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="129" sectionHeaderHeight="22" sectionFooterHeight="22" id="BbA-1C-JyK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Wfq-1e-cAC">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wfq-1e-cAC" id="GKO-Na-40R">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="jKg-7o-MNk" id="dcw-0q-FGY"/>
                             <outlet property="delegate" destination="jKg-7o-MNk" id="LcZ-1v-FFP"/>
                         </connections>
                     </tableView>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1ka-9I-aHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="146" y="63"/>
         </scene>

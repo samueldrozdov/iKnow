@@ -27,8 +27,10 @@
     
     categorySelected = false;
     
-    //Table View background - behind cells, offset - color
-    //[self.tableView setBackgroundColor:[UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0f]];
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped)];
+    tgr.delegate = self;
+    [self.tableView addGestureRecognizer:tgr];
+    
     [self.tableView setBackgroundColor:[UIColor colorWithRed:44/255.0 green:62/255.0 blue:80/255.0 alpha:1.0f]];
     
     //six flat colors so the screen (split in five) never shows two of the same color
@@ -104,6 +106,7 @@
     
     [cell.mainTextView setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.7]];
     [cell.mainTextView setTextAlignment:NSTextAlignmentCenter];
+    cell.mainTextView.delegate = self;
     
     if([categories count] == indexPath.row) {
         //Add button cell
@@ -136,26 +139,23 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    MainCellNib *cell = (MainCellNib*)[tableView cellForRowAtIndexPath:indexPath];
     if([categories count] == indexPath.row) {
         //Add button clicked
-        cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:30];
-        [cell.textLabel setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.7]];
-    } else if([cell.textLabel.text isEqualToString:[categories objectAtIndex:indexPath.row]]) {
+        cell.mainTextView.font = [UIFont fontWithName:@"Helvetica" size:30];
+        [cell.mainTextView setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.7]];
+    } else if([cell.mainTextView.text isEqualToString:[categories objectAtIndex:indexPath.row]]) {
         //Only clear the text if it is the same as the default text
-        cell.textLabel.text = @"";
+        cell.mainTextView.text = @"";
         //Begin editing label
-    } else {
-        //[add] If something was already written edit text that is already there
     }
-    
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    MainCellNib *cell = (MainCellNib*)[tableView cellForRowAtIndexPath:indexPath];
     //If the cell is deselcted without new text it shows the category
-    if([cell.textLabel.text isEqualToString:@""]) {
-        cell.textLabel.text = [categories objectAtIndex:indexPath.row];
+    if([cell.mainTextView.text isEqualToString:@""]) {
+        cell.mainTextView.text = [categories objectAtIndex:indexPath.row];
     } else {
         //[add] Stop editing text and save
     }
@@ -164,6 +164,17 @@
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     //[add] move the selected cell to the top and make it a section header with a back button
     //reload the table view with the past data from that category
+}
+
+#pragma mark - Text Saving / Mechanics
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    NSLog(@"ASD");
+}
+
+
+-(void)viewTapped {
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Editing Buttons
