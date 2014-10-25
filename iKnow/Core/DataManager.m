@@ -28,8 +28,14 @@
 - (PFObject*)parsePostDictionary:(NSDictionary*)data
 {
     PFObject *post = [PFObject objectWithClassName:IKPost];
+    post[IKPostUser] = [PFUser user];
     post[IKPostCategory] = data[IKPostCategory];
     post[IKPostContent] = data[IKPostContent];
+    
+    PFACL *postACL = [PFACL ACLWithUser:[PFUser currentUser]];
+    [postACL setPublicReadAccess:NO];
+    post.ACL = postACL;
+    
     return post;
 }
 
@@ -52,7 +58,8 @@
 - (void)queryPostsWithCategory:(NSString*)category withBlock:(void (^)(NSError *err, NSArray *objects))callback
 {
     PFQuery *query = [PFQuery queryWithClassName:IKPost];
-    [query whereKey:IKPostCategory equalTo:@"Dan Stemkoski"];
+    [query whereKey:IKPostUser equalTo:[PFUser currentUser]];
+    [query whereKey:IKPostCategory equalTo:category];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objs, NSError *error) {
         if (!error) {
             // The find succeeded.

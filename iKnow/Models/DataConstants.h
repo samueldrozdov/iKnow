@@ -11,6 +11,7 @@
 
 // Post
 static NSString * const IKPost = @"Post";
+static NSString * const IKPostUser = @"User";
 static NSString * const IKPostCategory = @"Category";
 static NSString * const IKPostContent = @"Content";
 
