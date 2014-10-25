@@ -4,7 +4,7 @@ iKnow
 A iOS knowledge bank app.
 
 Remeber...
-* A Favorite Product Hunt Product
+* A Favorite PH Product
 * An Interesting Fact
 * A Cool Quote
 * A SAT Word
@@ -12,4 +12,3 @@ Remeber...
 * A Nice Song
 * A Good Resturaunt
 * A Delicous Recipe
-
