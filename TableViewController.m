@@ -25,12 +25,20 @@
     UITapGestureRecognizer *tgr;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)presentLoginView
+{
+    LoginViewController *lvc = [[LoginViewController alloc] init];
+    [self presentViewController:lvc animated:YES completion:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+    if ([PFUser currentUser] &&
+        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         
     } else {
-        //[self presentLoginView];
+        [self presentLoginView];
     }
 }
 
@@ -45,11 +53,6 @@
     UINib *mainCell = [UINib nibWithNibName:@"MainCellNib" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:mainCell forCellReuseIdentifier:@"MainCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-}
-
-- (void)presentLoginView {
-    LoginViewController *lvc = [[LoginViewController alloc] init];
-    [self presentViewController:lvc animated:YES completion:nil];
 }
 
 #pragma mark - Table View Data Source
@@ -80,6 +83,8 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if([categories count] == indexPath.row) {
+        
+        //Your Code/Button Here!
         cell.mainTextView.text = @"Logout";
         
         UIColor *bgColor = [UIColor colorWithRed:241/255.0 green:196/255.0 blue:15/255.0 alpha:0.9];
@@ -95,9 +100,6 @@
         [self.view addGestureRecognizer:swipeLeft];
         
         //Category cell
-        cell.categoryButton.hidden = NO;
-        [cell.categoryButton addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [cell setTag:indexPath.row];
         [cell setBackgroundColor:categories[indexPath.row][@"color"]];
         [cell.mainTextView setBackgroundColor:categories[indexPath.row][@"color"]];
         cell.mainTextView.text = categories[indexPath.row][@"title"];
@@ -123,11 +125,6 @@
     }
 }
 
--(void)categoryButtonClicked:(UIButton*)sender {
-    NSString *categoryName = categories[sender tag][@"title"]];
-    
-}
-
 -(void)cellSwipedRight:(UIGestureRecognizer*)gesture {
     [self.view endEditing:YES];
     
@@ -142,6 +139,8 @@
                 [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
             } completion:^(BOOL finished){
                 if(finished) {
+                    AddPostViewController *apvc = [[AddPostViewController alloc] init];
+                    [self presentViewController:apvc animated:YES completion:nil];
                     [UIView animateWithDuration:0.3 animations:^{
                         [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
                     }];
