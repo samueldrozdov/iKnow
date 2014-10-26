@@ -39,6 +39,8 @@
 		9F5978BD19FC3C3E00384C5D /* login-button-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978B919FC3C3E00384C5D /* login-button-small.png */; };
 		9F5978BE19FC3C3E00384C5D /* login-button-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978BA19FC3C3E00384C5D /* login-button-small@2x.png */; };
 		9F5978C219FC6A2A00384C5D /* IKCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5978C119FC6A2A00384C5D /* IKCategories.m */; };
+		9F5978C519FC9EBB00384C5D /* AddPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5978C419FC9EBB00384C5D /* AddPostViewController.m */; };
+		9F5978C719FC9EDA00384C5D /* AddPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978C619FC9EDA00384C5D /* AddPostViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,9 @@
 		9F5978BF19FC69A500384C5D /* IKConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IKConstants.h; sourceTree = "<group>"; };
 		9F5978C019FC6A2A00384C5D /* IKCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCategories.h; sourceTree = "<group>"; };
 		9F5978C119FC6A2A00384C5D /* IKCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCategories.m; sourceTree = "<group>"; };
+		9F5978C319FC9EBB00384C5D /* AddPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPostViewController.h; path = Controllers/AddPostViewController.h; sourceTree = "<group>"; };
+		9F5978C419FC9EBB00384C5D /* AddPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddPostViewController.m; path = Controllers/AddPostViewController.m; sourceTree = "<group>"; };
+		9F5978C619FC9EDA00384C5D /* AddPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddPostViewController.xib; path = Views/AddPostViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +284,8 @@
 			children = (
 				9F5978AE19FC3BE900384C5D /* LoginViewController.h */,
 				9F5978AF19FC3BE900384C5D /* LoginViewController.m */,
+				9F5978C319FC9EBB00384C5D /* AddPostViewController.h */,
+				9F5978C419FC9EBB00384C5D /* AddPostViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -287,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				9F5978B219FC3C1000384C5D /* LoginViewController.xib */,
+				9F5978C619FC9EDA00384C5D /* AddPostViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -407,6 +415,7 @@
 				41A9183819FB446000C4C08A /* Images.xcassets in Resources */,
 				9F5978BB19FC3C3E00384C5D /* login-button-small-pressed.png in Resources */,
 				9F5978BE19FC3C3E00384C5D /* login-button-small@2x.png in Resources */,
+				9F5978C719FC9EDA00384C5D /* AddPostViewController.xib in Resources */,
 				9F5978BD19FC3C3E00384C5D /* login-button-small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +439,7 @@
 				9F59788219FC1EB500384C5D /* DataManager.m in Sources */,
 				9F5978C219FC6A2A00384C5D /* IKCategories.m in Sources */,
 				9F5978B019FC3BE900384C5D /* LoginViewController.m in Sources */,
+				9F5978C519FC9EBB00384C5D /* AddPostViewController.m in Sources */,
 				41A9182D19FB446000C4C08A /* AppDelegate.m in Sources */,
 				41A9182A19FB446000C4C08A /* main.m in Sources */,
 				41A9185219FB44D600C4C08A /* TableViewController.m in Sources */,
