@@ -48,10 +48,10 @@
 
 - (IBAction)loginButtonTouchHandler:(id)sender  {
     // Set permissions required from the facebook user account
-//    NSArray *permissionsArray = @[];
+    NSArray *permissionsArray = @[];
 
     // Login PFUser using Facebook
-    [PFFacebookUtils logInWithPermissions:nil block:^(PFUser *user, NSError *error) {
+    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
         [_activityIndicator stopAnimating]; // Hide loading indicator
         
         if (!user) {

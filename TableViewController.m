@@ -11,6 +11,7 @@
 
 #import "LoginViewController.h"
 #import "AddPostViewController.h"
+#import "PostsTableViewController.h"
 #import "IKCategories.h"
 
 @interface TableViewController ()
@@ -30,7 +31,7 @@
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         
     } else {
-        //[self presentLoginView];
+        [self presentLoginView];
     }
 }
 
@@ -72,7 +73,6 @@
     //add tags as identifiers of the cells row
     [cell setTag:indexPath.row];
     [cell.mainTextView setTag:indexPath.row];
-    [cell.categoryButton setTag:indexPath.row];
     
     cell.categoryButton.hidden = YES;
     cell.mainTextView.editable = NO;
@@ -88,15 +88,13 @@
     } else {
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedRight:)];
         [swipeRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
-        [self.view addGestureRecognizer:swipeRight];
+        [cell addGestureRecognizer:swipeRight];
         
         UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedLeft:)];
         [swipeLeft setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-        [self.view addGestureRecognizer:swipeLeft];
+        [cell addGestureRecognizer:swipeLeft];
         
         //Category cell
-        cell.categoryButton.hidden = NO;
-        [cell.categoryButton addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [cell setTag:indexPath.row];
         [cell setBackgroundColor:categories[indexPath.row][@"color"]];
         [cell.mainTextView setBackgroundColor:categories[indexPath.row][@"color"]];
@@ -118,14 +116,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if([categories count] + 1 == indexPath.row) {
+    if([categories count] == indexPath.row) {
         [self logoutMethod];
     }
-}
-
--(void)categoryButtonClicked:(UIButton*)sender {
-    NSString *categoryName = categories[sender tag][@"title"]];
-    
 }
 
 -(void)cellSwipedRight:(UIGestureRecognizer*)gesture {
@@ -133,6 +126,7 @@
     
     CGPoint location = [gesture locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
+    NSDictionary *category = categories[swipedIndexPath.row];
     MainCellNib *cell  = (MainCellNib*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     [UIView animateWithDuration:0.3 animations:^{
         [cell setFrame:CGRectMake(cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
@@ -142,6 +136,10 @@
                 [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
             } completion:^(BOOL finished){
                 if(finished) {
+                    
+                    AddPostViewController *apvc = [[AddPostViewController alloc] initWithCategory:category];
+                    [self presentViewController:apvc animated:YES completion:nil];
+                    
                     [UIView animateWithDuration:0.3 animations:^{
                         [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
                     }];
@@ -156,6 +154,7 @@
     
     CGPoint location = [gesture locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
+    NSDictionary *category = categories[swipedIndexPath.row];
     MainCellNib *cell  = (MainCellNib*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     [UIView animateWithDuration:0.3 animations:^{
         [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
@@ -164,10 +163,15 @@
             [UIView animateWithDuration:0 animations:^{
                 [cell setFrame:CGRectMake(cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
             } completion:^(BOOL finished){
-                if(finished)
+                if(finished) {
+                    
+                    PostsTableViewController *ptvc = [[PostsTableViewController alloc] initWithCategory:category];
+                    [self presentViewController:ptvc animated:YES completion:nil];
+                
                     [UIView animateWithDuration:0.3 animations:^{
                         [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
                     }];
+                }
             }];
     }];
 }
