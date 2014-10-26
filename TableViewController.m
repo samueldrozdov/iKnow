@@ -10,13 +10,14 @@
 #import "MainCellNib.h"
 
 #import "LoginViewController.h"
+#import "IKCategories.h"
 
 @interface TableViewController ()
 
 @end
 
 @implementation TableViewController {
-    NSMutableArray *categories;
+    NSArray *categories;
     NSMutableArray *colors;
     bool categorySelected;
     NSInteger selectedCategoryIndex;
@@ -42,10 +43,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    categories = [[NSMutableArray alloc] init];
-    colors = [[NSMutableArray alloc] init];
+    categories = [[IKCategories sharedManager] getCategories];
     selectedCategoryIndex = 0;
-    
     categorySelected = false;
     
     tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped)];
@@ -53,48 +52,10 @@
     
     [self.tableView setBackgroundColor:[UIColor colorWithRed:44/255.0 green:62/255.0 blue:80/255.0 alpha:1.0f]];
     
-    //six flat colors so the screen (split in five) never shows two of the same color
-    UIColor *color0 = [UIColor colorWithRed:46/255.0 green:204/255.0 blue:113/255.0 alpha:1.0f];
-    UIColor *color1 = [UIColor colorWithRed:231/255.0 green:76/255.0 blue:60/255.0 alpha:1.0];
-    UIColor *color2 = [UIColor colorWithRed:52/255.0 green:152/255.0 blue:219/255.0 alpha:1.0];
-    UIColor *color3 = [UIColor colorWithRed:230/255.0 green:126/255.0 blue:35/255.0 alpha:1.0];
-    UIColor *color4 = [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182/255.0 alpha:1.0];
-    UIColor *color5 = [UIColor colorWithRed:241/255.0 green:196/255.0 blue:15/255.0 alpha:0.9];
-    [colors addObject:color0];
-    [colors addObject:color1];
-    [colors addObject:color2];
-    [colors addObject:color3];
-    [colors addObject:color4];
-    [colors addObject:color5];
-    
     //Register the custom table view cell from its nib file
     UINib *mainCell = [UINib nibWithNibName:@"MainCellNib" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:mainCell forCellReuseIdentifier:@"MainCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-
-    //use plist to store category data!? Default data would work because it could be deleted
-    //default categories
-    [self addCategoryWithString:@"An Interesting Fact"];
-    [self addCategoryWithString:@"A Cool Quote"];
-    [self addCategoryWithString:@"A SAT Word"];
-    [self addCategoryWithString:@"That Person's Name"];
-    [self addCategoryWithString:@"A Nice Song"];
-    
-    //[optional] Suggestions somewhere???
-    /* //Suggestions
-    [self addCategoryWithString:@"A Tasty Resturaut"];
-    [self addCategoryWithString:@"A Good Recipe"];
-    */
-}
-
-//Add Category (Adds category, create storage for its contents)
-- (void)addCategoryWithString:(NSString*)string {
-    if([[string stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
-        NSLog(@"Write something hooligan!");
-    } else {
-        [categories addObject:string];
-        //(optional)Maybe pick your own color too? when adding a category, boosts memory
-    }
 }
 
 #pragma mark - Table View Data Source
@@ -119,8 +80,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainCellNib *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MainCell" forIndexPath:indexPath];
     
-    [cell setBackgroundColor:[colors objectAtIndex:(indexPath.row % 6)]];
-    [cell.mainTextView setBackgroundColor:[colors objectAtIndex:(indexPath.row % 6)]];
+    
     cell.mainTextView.font = [UIFont fontWithName:@"Helvetica Bold" size:30];
     //[add] resize for size of text label
     
@@ -168,13 +128,21 @@
         cell.categoryButton.hidden = YES;
 
         cell.mainTextView.userInteractionEnabled = NO;
+        
+        UIColor *bgColor = [UIColor colorWithRed:241/255.0 green:196/255.0 blue:15/255.0 alpha:0.9];
+        [cell setBackgroundColor:bgColor];
+        [cell.mainTextView setBackgroundColor:bgColor];
     } else {
         //Category cell
-        cell.mainTextView.text = [categories objectAtIndex:indexPath.row];
+        [cell setBackgroundColor:categories[indexPath.row][@"color"]];
+        [cell.mainTextView setBackgroundColor:categories[indexPath.row][@"color"]];
+        
+        
+        cell.mainTextView.text = categories[indexPath.row][@"title"];
         [cell.categoryButton addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.categoryButton.hidden = NO;
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     return cell;
@@ -346,7 +314,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if(categorySelected) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 40)];
-        NSString *categoryString = [categories objectAtIndex:selectedCategoryIndex];
+        NSString *categoryString = categories[selectedCategoryIndex][@"title"];
         UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, 10, 20)];
         [backButton addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [backButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:30]];

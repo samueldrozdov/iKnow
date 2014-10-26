@@ -38,6 +38,7 @@
 		9F5978BC19FC3C3E00384C5D /* login-button-small-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978B819FC3C3E00384C5D /* login-button-small-pressed@2x.png */; };
 		9F5978BD19FC3C3E00384C5D /* login-button-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978B919FC3C3E00384C5D /* login-button-small.png */; };
 		9F5978BE19FC3C3E00384C5D /* login-button-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978BA19FC3C3E00384C5D /* login-button-small@2x.png */; };
+		9F5978C219FC6A2A00384C5D /* IKCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5978C119FC6A2A00384C5D /* IKCategories.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,9 @@
 		9F5978B819FC3C3E00384C5D /* login-button-small-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-small-pressed@2x.png"; sourceTree = "<group>"; };
 		9F5978B919FC3C3E00384C5D /* login-button-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-small.png"; sourceTree = "<group>"; };
 		9F5978BA19FC3C3E00384C5D /* login-button-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-small@2x.png"; sourceTree = "<group>"; };
+		9F5978BF19FC69A500384C5D /* IKConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IKConstants.h; sourceTree = "<group>"; };
+		9F5978C019FC6A2A00384C5D /* IKCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCategories.h; sourceTree = "<group>"; };
+		9F5978C119FC6A2A00384C5D /* IKCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCategories.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,9 @@
 				9F5978AD19FC3B9100384C5D /* Controllers */,
 				9F59788619FC21FB00384C5D /* Models */,
 				9F59787F19FC1E9200384C5D /* Core */,
+				9F5978BF19FC69A500384C5D /* IKConstants.h */,
+				9F5978C019FC6A2A00384C5D /* IKCategories.h */,
+				9F5978C119FC6A2A00384C5D /* IKCategories.m */,
 				41A9182B19FB446000C4C08A /* AppDelegate.h */,
 				41A9182C19FB446000C4C08A /* AppDelegate.m */,
 				41A9185019FB44D600C4C08A /* TableViewController.h */,
@@ -421,6 +428,7 @@
 				41F9904119FC28F7001046D1 /* MainCellNib.m in Sources */,
 				41A9183019FB446000C4C08A /* iKnow.xcdatamodeld in Sources */,
 				9F59788219FC1EB500384C5D /* DataManager.m in Sources */,
+				9F5978C219FC6A2A00384C5D /* IKCategories.m in Sources */,
 				9F5978B019FC3BE900384C5D /* LoginViewController.m in Sources */,
 				41A9182D19FB446000C4C08A /* AppDelegate.m in Sources */,
 				41A9182A19FB446000C4C08A /* main.m in Sources */,
