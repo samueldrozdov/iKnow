@@ -154,11 +154,12 @@
         //plus button/background could be yellow because it is the most eye catching color
         
     } else */ if([categories count] == indexPath.row) {
-        UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedRight)];
+        UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedRight:)];
         [swipeRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
         [self.view addGestureRecognizer:swipeRight];
-        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedLeft)];
-        [swipeLeft setDirection:(UISwipeGestureRecognizerDirectionRight)];
+        
+        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedLeft:)];
+        [swipeLeft setDirection:(UISwipeGestureRecognizerDirectionLeft)];
         [self.view addGestureRecognizer:swipeLeft];
         
         //Your Code/Button Here!
@@ -245,12 +246,46 @@
     [self.view endEditing:YES];
 }
 
--(void)cellSwipedRight {
-    NSLog(@"YAY RIGHT");
+-(void)cellSwipedRight:(UIGestureRecognizer*)gesture {
+    [self.view endEditing:YES];
+    
+    CGPoint location = [gesture locationInView:self.tableView];
+    NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
+    MainCellNib *cell  = (MainCellNib*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    [UIView animateWithDuration:0.3 animations:^{
+        [cell setFrame:CGRectMake(cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+    } completion:^(BOOL finished){
+        if(finished)
+        [UIView animateWithDuration:0 animations:^{
+            [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+        } completion:^(BOOL finished){
+            if(finished)
+            [UIView animateWithDuration:0.3 animations:^{
+                [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+            }];
+        }];
+    }];
 }
 
--(void)cellSwipedLeft {
-    NSLog(@"YAY RIGHT");
+-(void)cellSwipedLeft:(UIGestureRecognizer*)gesture {
+    [self.view endEditing:YES];
+    
+    CGPoint location = [gesture locationInView:self.tableView];
+    NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
+    MainCellNib *cell  = (MainCellNib*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    [UIView animateWithDuration:0.3 animations:^{
+        [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+    } completion:^(BOOL finished){
+        if(finished)
+            [UIView animateWithDuration:0 animations:^{
+                [cell setFrame:CGRectMake(cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+            } completion:^(BOOL finished){
+                if(finished)
+                    [UIView animateWithDuration:0.3 animations:^{
+                        [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+                    }];
+            }];
+    }];
 }
 
 #pragma mark - Editing Buttons
@@ -287,12 +322,6 @@
 
 #pragma mark - Section Header
 
--(void)categoryButtonClicked:(UIButton*)sender {
-    categorySelected = true;
-    selectedCategoryIndex = [sender tag];
-    NSLog(@"%i", selectedCategoryIndex);
-    [self.tableView reloadData];
-}
 
 -(void)backButtonTapped:(UIButton*)sender {
     categorySelected = false;
@@ -306,6 +335,12 @@
     } else {
         return 0;
     }
+}
+
+-(void)categoryButtonClicked:(UIButton*)sender {
+    categorySelected = true;
+    selectedCategoryIndex = [sender tag];
+    [self.tableView reloadData];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
