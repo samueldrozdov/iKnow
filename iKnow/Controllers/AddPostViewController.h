@@ -10,6 +10,4 @@
 
 @interface AddPostViewController : UIViewController
 
-- (id) initWithCategory:(NSDictionary*)c;
-
 @end
