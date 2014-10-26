@@ -32,6 +32,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     if ([PFUser currentUser] &&
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         
@@ -55,7 +56,7 @@
     //Register the custom table view cell from its nib file
     UINib *mainCell = [UINib nibWithNibName:@"MainCellNib" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:mainCell forCellReuseIdentifier:@"MainCell"];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 #pragma mark - Table View Data Source
@@ -80,13 +81,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainCellNib *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MainCell" forIndexPath:indexPath];
     
-    
     cell.mainTextView.font = [UIFont fontWithName:@"Helvetica Bold" size:30];
     //[add] resize for size of text label
     
     [cell.mainTextView setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.7]];
     [cell.mainTextView setTextAlignment:NSTextAlignmentCenter];
     cell.mainTextView.delegate = self;
+    cell.selectionStyle = UITableViewCellSeparatorStyleNone;
     
     //add tags as identifiers of the cells row
     [cell setTag:indexPath.row];
@@ -114,13 +115,6 @@
         //plus button/background could be yellow because it is the most eye catching color
         
     } else */ if([categories count] == indexPath.row) {
-        UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedRight:)];
-        [swipeRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
-        [self.view addGestureRecognizer:swipeRight];
-        
-        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedLeft:)];
-        [swipeLeft setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-        [self.view addGestureRecognizer:swipeLeft];
         
         //Your Code/Button Here!
         cell.mainTextView.text = @"Logout";
@@ -133,6 +127,14 @@
         [cell setBackgroundColor:bgColor];
         [cell.mainTextView setBackgroundColor:bgColor];
     } else {
+        UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedRight:)];
+        [swipeRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
+        [cell addGestureRecognizer:swipeRight];
+        
+        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedLeft:)];
+        [swipeLeft setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+        [cell addGestureRecognizer:swipeLeft];
+        
         //Category cell
         [cell setBackgroundColor:categories[indexPath.row][@"color"]];
         [cell.mainTextView setBackgroundColor:categories[indexPath.row][@"color"]];
@@ -142,7 +144,6 @@
         [cell.categoryButton addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.categoryButton.hidden = NO;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     return cell;
@@ -153,20 +154,18 @@
     return self.view.frame.size.height/5;
 }
 
--(void)logoutMethod
-{
+-(void)logoutMethod {
     NSLog(@"Logging out");
     [PFUser logOut];
     [self presentLoginView];
 }
 
-//cells dont highlight when selected
--(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO;
-}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([categories count] + 1 == indexPath.row) {
+        [self logoutMethod];
+    }
     
+    /*
     MainCellNib *cell = (MainCellNib*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setTag:indexPath.row];
     if([categories count] == indexPath.row) {
@@ -177,11 +176,12 @@
     } else if([categories count] + 1 == indexPath.row) {
         //Add button clicked
         [self logoutMethod];
-    } else if([cell.mainTextView.text isEqualToString:[categories objectAtIndex:indexPath.row]]) {
+    } else if([cell.mainTextView.text isEqualToString:categories[indexPath.row][@"title"]]) {
         //Only clear the text if it is the same as the default text
         cell.mainTextView.text = @"";
         //Begin editing label
     }
+    */
 }
 
 #pragma mark - Text Saving / Mechanics
@@ -190,7 +190,7 @@
     [self.tableView addGestureRecognizer:tgr];
     [textView becomeFirstResponder];
     
-    if([textView.text isEqualToString:[categories objectAtIndex:[textView tag]]]) {
+    if([textView.text isEqualToString:categories[textView.tag][@"title"]]) {
         textView.text = @"";
     }
 }
@@ -199,11 +199,11 @@
     [self.tableView removeGestureRecognizer:tgr];
     [textView resignFirstResponder];
     
-    if([textView.text isEqualToString:[categories objectAtIndex:[textView tag]]]) {
+    if([textView.text isEqualToString:categories[textView.tag][@"title"]]) {
         NSLog(@"text view was not edited");
     } else if ([[textView.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
         NSLog(@"text view empty");
-        textView.text = [categories objectAtIndex:[textView tag]];
+        textView.text = categories[textView.tag][@"title"];
     } else {
         //save text here
         NSLog(@"%@", textView.text);
