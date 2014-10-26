@@ -17,21 +17,19 @@
 @end
 
 @implementation TableViewController {
-    NSArray *categories;
+    NSMutableArray *categories;
     NSMutableArray *colors;
     bool categorySelected;
     NSInteger selectedCategoryIndex;
     UITapGestureRecognizer *tgr;
 }
 
-- (void)presentLoginView
-{
+- (void)presentLoginView {
     LoginViewController *lvc = [[LoginViewController alloc] init];
     [self presentViewController:lvc animated:YES completion:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if ([PFUser currentUser] &&
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
@@ -48,7 +46,7 @@
     selectedCategoryIndex = 0;
     categorySelected = false;
     
-    tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped)];
+    tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTappedAfterEditing)];
     tgr.delegate = self;
     
     [self.tableView setBackgroundColor:[UIColor colorWithRed:44/255.0 green:62/255.0 blue:80/255.0 alpha:1.0f]];
@@ -68,12 +66,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(!categorySelected) {
         //If no cell has been selected return the number of categories plus one, for the add button
-        return [categories count] + 1;
+        return [categories count];
     } else {
-        //[add] Return the number of items in the selected category
-        
-        //place holder
-        return 3;
+        //return count of selected category
+        return [categories[selectedCategoryIndex][@"history"] count];
     }
 }
 
@@ -99,6 +95,7 @@
         cell.categoryButton.hidden = YES;
         [cell.mainTextView setEditable:NO];
         [cell.mainTextView setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]];
+        cell.mainTextView.text = [categories[selectedCategoryIndex][@"history"] objectAtIndex:[categories[selectedCategoryIndex][@"history"] count]-1-indexPath.row];
 
     } else
     //[Removed for now] Add your own categories
@@ -114,7 +111,7 @@
         cell.categoryButton.hidden = YES;
         //plus button/background could be yellow because it is the most eye catching color
         
-    } else */ if([categories count] == indexPath.row) {
+    } else if([categories count] == indexPath.row) {
         
         //Your Code/Button Here!
         cell.mainTextView.text = @"Logout";
@@ -126,7 +123,7 @@
         UIColor *bgColor = [UIColor colorWithRed:241/255.0 green:196/255.0 blue:15/255.0 alpha:0.9];
         [cell setBackgroundColor:bgColor];
         [cell.mainTextView setBackgroundColor:bgColor];
-    } else {
+    }*/{
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedRight:)];
         [swipeRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
         [cell addGestureRecognizer:swipeRight];
@@ -144,14 +141,23 @@
         [cell.categoryButton addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.categoryButton.hidden = NO;
+        categories[indexPath.row][@"index"] = [NSNumber numberWithInteger:[categories[indexPath.row][@"history"] count]];
     }
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //Return the height of the row
-    return self.view.frame.size.height/5;
+    if(categorySelected) {
+        UIFont *font = [UIFont fontWithName:@"Helvetica Bold" size:30];
+        NSDictionary *userAttributes = @{NSFontAttributeName: font,
+                                         NSForegroundColorAttributeName: [UIColor blackColor]};
+        CGSize size = [categories[selectedCategoryIndex][@"history"][[categories[selectedCategoryIndex][@"history"] count]-1-indexPath.row] sizeWithAttributes:userAttributes];
+        int rowsNeeded = (size.width / self.view.frame.size.width)+1;
+        return size.height * rowsNeeded + 40;
+    } else {
+        return self.view.frame.size.height/5;
+    }
 }
 
 -(void)logoutMethod {
@@ -205,55 +211,103 @@
         NSLog(@"text view empty");
         textView.text = categories[textView.tag][@"title"];
     } else {
+        NSMutableDictionary *tempDict = [categories[textView.tag] mutableCopy];
         //save text here
-        NSLog(@"%@", textView.text);
+        [tempDict[@"history"] addObject:textView.text];
+        tempDict[@"index"] = [NSNumber numberWithInteger:[categories[textView.tag][@"history"] count]];
+        categories[textView.tag] = [NSMutableDictionary dictionaryWithDictionary:tempDict];
+        
+        [UIView animateWithDuration:0 animations:^{
+            textView.alpha = 0;
+        } completion:^(BOOL finished){
+            textView.text = @"SAVED!";
+            [UIView animateWithDuration:1 animations:^{
+                textView.alpha = 1;
+            } completion:^(BOOL finished){
+                [UIView animateWithDuration:0 animations:^{
+                } completion:^(BOOL finished){
+                    textView.text = categories[textView.tag][@"title"];
+                }];
+            }];
+        }];
     }
 }
 
--(void)viewTapped {
+-(void)viewTappedAfterEditing {
     [self.view endEditing:YES];
 }
 
 -(void)cellSwipedRight:(UIGestureRecognizer*)gesture {
     [self.view endEditing:YES];
-    
+
     CGPoint location = [gesture locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
     MainCellNib *cell  = (MainCellNib*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    [UIView animateWithDuration:0.3 animations:^{
-        [cell setFrame:CGRectMake(cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
-    } completion:^(BOOL finished){
-        if(finished)
-        [UIView animateWithDuration:0 animations:^{
-            [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+    
+    NSInteger index = [categories[swipedIndexPath.row][@"index"] integerValue];
+    
+    if(index > 0) {
+        index --;
+        categories[swipedIndexPath.row][@"index"] = [NSNumber numberWithInteger:index];
+        [UIView animateWithDuration:0.3 animations:^{
+            [cell setFrame:CGRectMake(cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
         } completion:^(BOOL finished){
             if(finished)
-            [UIView animateWithDuration:0.3 animations:^{
-                [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+            [UIView animateWithDuration:0 animations:^{
+                [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+            } completion:^(BOOL finished){
+                
+                NSMutableArray *history = categories[swipedIndexPath.row][@"history"];
+                cell.mainTextView.text = [history objectAtIndex:index];
+                
+                if(finished)
+                [UIView animateWithDuration:0.3 animations:^{
+                    [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+                }];
             }];
         }];
-    }];
+    } else {
+        NSLog(@"cant do that silly :P");
+    }
 }
 
 -(void)cellSwipedLeft:(UIGestureRecognizer*)gesture {
     [self.view endEditing:YES];
-    
+
     CGPoint location = [gesture locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
     MainCellNib *cell  = (MainCellNib*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    [UIView animateWithDuration:0.3 animations:^{
-        [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
-    } completion:^(BOOL finished){
-        if(finished)
-            [UIView animateWithDuration:0 animations:^{
-                [cell setFrame:CGRectMake(cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
-            } completion:^(BOOL finished){
-                if(finished)
-                    [UIView animateWithDuration:0.3 animations:^{
-                        [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
-                    }];
-            }];
-    }];
+    
+    NSInteger count = [categories[swipedIndexPath.row][@"history"] count];
+    NSInteger index = [categories[swipedIndexPath.row][@"index"] integerValue];
+    
+    if(index < count) {
+        index ++;
+        categories[swipedIndexPath.row][@"index"] = [NSNumber numberWithInteger:index];
+
+        [UIView animateWithDuration:0.3 animations:^{
+            [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+        } completion:^(BOOL finished){
+            if(finished)
+                [UIView animateWithDuration:0 animations:^{
+                    [cell setFrame:CGRectMake(cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+                } completion:^(BOOL finished){
+                    if(index == count) {
+                        cell.mainTextView.text = categories[swipedIndexPath.row][@"title"];
+                    } else {
+                        NSMutableArray *history = categories[swipedIndexPath.row][@"history"];
+                        cell.mainTextView.text = [history objectAtIndex:index];
+                    }
+                    
+                    if(finished)
+                        [UIView animateWithDuration:0.3 animations:^{
+                            [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
+                        }];
+                }];
+        }];
+    } else {
+        NSLog(@"cant do that silly :P");
+    }
 }
 
 #pragma mark - Editing Buttons
@@ -294,6 +348,7 @@
 -(void)backButtonTapped:(UIButton*)sender {
     categorySelected = false;
     selectedCategoryIndex = 0;
+    [self viewTappedAfterEditing];
     [self.tableView reloadData];
 }
 

@@ -17,6 +17,10 @@
                             <outlet property="delegate" destination="jKg-7o-MNk" id="LcZ-1v-FFP"/>
                         </connections>
                     </tableView>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ka-9I-aHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

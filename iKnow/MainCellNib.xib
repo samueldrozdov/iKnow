@@ -13,14 +13,14 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Tf-iF-Shp" id="Jn8-gd-yIr">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jq-7c-anV">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5jq-7c-anV">
                         <rect key="frame" x="16" y="16" width="414" height="86"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                     </textView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrq-WN-kKA">
-                        <rect key="frame" x="416" y="8" width="22" height="22"/>
+                        <rect key="frame" x="416" y="16" width="22" height="22"/>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -29,11 +29,17 @@
                 <constraints>
                     <constraint firstItem="wrq-WN-kKA" firstAttribute="trailing" secondItem="Jn8-gd-yIr" secondAttribute="trailingMargin" id="4yG-gL-cyL"/>
                     <constraint firstAttribute="bottomMargin" secondItem="5jq-7c-anV" secondAttribute="bottom" constant="8" id="Jyf-qf-Eox"/>
+                    <constraint firstItem="wrq-WN-kKA" firstAttribute="top" secondItem="Jn8-gd-yIr" secondAttribute="topMargin" constant="8" id="X4h-1d-54g"/>
                     <constraint firstAttribute="trailingMargin" secondItem="5jq-7c-anV" secondAttribute="trailing" constant="8" id="aay-Sy-6Ty"/>
                     <constraint firstItem="5jq-7c-anV" firstAttribute="leading" secondItem="Jn8-gd-yIr" secondAttribute="leadingMargin" constant="8" id="glA-0A-Kqt"/>
                     <constraint firstItem="wrq-WN-kKA" firstAttribute="top" secondItem="Jn8-gd-yIr" secondAttribute="topMargin" id="nAz-zJ-mlo"/>
                     <constraint firstItem="5jq-7c-anV" firstAttribute="top" secondItem="Jn8-gd-yIr" secondAttribute="topMargin" constant="8" id="yiX-3e-rJU"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="nAz-zJ-mlo"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="categoryButton" destination="wrq-WN-kKA" id="pk6-5P-6UP"/>
