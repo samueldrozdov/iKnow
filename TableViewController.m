@@ -28,8 +28,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([PFUser currentUser] &&
-        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         
     } else {
         [self presentLoginView];
@@ -76,7 +75,6 @@
     cell.mainTextView.font = [UIFont fontWithName:@"Helvetica Bold" size:40];
 
     if([categories count] == indexPath.row) {
-        //Your Code/Button Here!
         cell.mainTextView.text = @"Logout";
         
         UIColor *bgColor = [UIColor colorWithRed:241/255.0 green:196/255.0 blue:15/255.0 alpha:0.9];
@@ -92,6 +90,7 @@
         [self.view addGestureRecognizer:swipeLeft];
         
         //Category cell
+        [cell setTag:indexPath.row];
         [cell setBackgroundColor:categories[indexPath.row][@"color"]];
         [cell.mainTextView setBackgroundColor:categories[indexPath.row][@"color"]];
         cell.mainTextView.text = categories[indexPath.row][@"title"];
@@ -130,8 +129,6 @@
                 [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
             } completion:^(BOOL finished){
                 if(finished) {
-                    AddPostViewController *apvc = [[AddPostViewController alloc] init];
-                    [self presentViewController:apvc animated:YES completion:nil];
                     [UIView animateWithDuration:0.3 animations:^{
                         [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
                     }];
@@ -148,9 +145,6 @@
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
     MainCellNib *cell  = (MainCellNib*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     
-    NSInteger count = [categories[swipedIndexPath.row][@"history"] count];
-    NSInteger index = [categories[swipedIndexPath.row][@"index"] integerValue];
-    
     [UIView animateWithDuration:0.3 animations:^{
         [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
     } completion:^(BOOL finished){
@@ -158,17 +152,12 @@
             [UIView animateWithDuration:0 animations:^{
                 [cell setFrame:CGRectMake(cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
             } completion:^(BOOL finished){
-                if(index == count) {
-                    cell.mainTextView.text = categories[swipedIndexPath.row][@"title"];
-                } else {
-                    NSMutableArray *history = categories[swipedIndexPath.row][@"history"];
-                    cell.mainTextView.text = [history objectAtIndex:index];
-                }
                 
-                if(finished)
+                if(finished) {
                     [UIView animateWithDuration:0.3 animations:^{
                         [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
                     }];
+                }
             }];
     }];
 }
