@@ -20,6 +20,7 @@
     NSMutableArray *colors;
     bool categorySelected;
     NSInteger selectedCategoryIndex;
+    UITapGestureRecognizer *tgr;
 }
 
 - (void)presentLoginView
@@ -34,7 +35,7 @@
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         
     } else {
-        [self presentLoginView];
+        //[self presentLoginView];
     }
 }
 
@@ -47,9 +48,8 @@
     
     categorySelected = false;
     
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped)];
+    tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped)];
     tgr.delegate = self;
-//    [self.tableView addGestureRecognizer:tgr];
     
     [self.tableView setBackgroundColor:[UIColor colorWithRed:44/255.0 green:62/255.0 blue:80/255.0 alpha:1.0f]];
     
@@ -106,7 +106,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(!categorySelected) {
         //If no cell has been selected return the number of categories plus one, for the add button
-        return [categories count] + 2;
+        return [categories count] + 1;
     } else {
         //[add] Return the number of items in the selected category
         
@@ -114,6 +114,7 @@
         return 3;
     }
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainCellNib *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MainCell" forIndexPath:indexPath];
@@ -127,13 +128,20 @@
     [cell.mainTextView setTextAlignment:NSTextAlignmentCenter];
     cell.mainTextView.delegate = self;
     
+    //add tags as identifiers of the cells row
     [cell setTag:indexPath.row];
+    [cell.mainTextView setTag:indexPath.row];
     [cell.categoryButton setTag:indexPath.row];
     
     if(categorySelected) {
         //[add] Return cells for the selected category
         cell.categoryButton.hidden = YES;
-    } else if([categories count] == indexPath.row) {
+        [cell.mainTextView setEditable:NO];
+        [cell.mainTextView setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]];
+
+    } else
+    //[Removed for now] Add your own categories
+    /* if([categories count] == indexPath.row) {
         //Add button cell
         cell.mainTextView.text = [NSString stringWithFormat:@"+"];
         cell.mainTextView.font = [UIFont fontWithName:@"Helvetica Bold" size:40];
@@ -145,7 +153,14 @@
         cell.categoryButton.hidden = YES;
         //plus button/background could be yellow because it is the most eye catching color
         
-    } else if([categories count] + 1 == indexPath.row) {
+    } else */ if([categories count] == indexPath.row) {
+        UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedRight)];
+        [swipeRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
+        [self.view addGestureRecognizer:swipeRight];
+        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedLeft)];
+        [swipeLeft setDirection:(UISwipeGestureRecognizerDirectionRight)];
+        [self.view addGestureRecognizer:swipeLeft];
+        
         //Your Code/Button Here!
         cell.mainTextView.text = @"Logout";
         cell.mainTextView.editable = NO;
@@ -176,7 +191,13 @@
     [self presentLoginView];
 }
 
+//cells dont highlight when selected
+-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     MainCellNib *cell = (MainCellNib*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setTag:indexPath.row];
     if([categories count] == indexPath.row) {
@@ -196,7 +217,19 @@
 
 #pragma mark - Text Saving / Mechanics
 
-- (void)textViewDidEndEditing:(UITextView *)textView {
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    [self.tableView addGestureRecognizer:tgr];
+    [textView becomeFirstResponder];
+    
+    if([textView.text isEqualToString:[categories objectAtIndex:[textView tag]]]) {
+        textView.text = @"";
+    }
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    [self.tableView removeGestureRecognizer:tgr];
+    [textView resignFirstResponder];
+    
     if([textView.text isEqualToString:[categories objectAtIndex:[textView tag]]]) {
         NSLog(@"text view was not edited");
     } else if ([[textView.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
@@ -212,8 +245,17 @@
     [self.view endEditing:YES];
 }
 
+-(void)cellSwipedRight {
+    NSLog(@"YAY RIGHT");
+}
+
+-(void)cellSwipedLeft {
+    NSLog(@"YAY RIGHT");
+}
+
 #pragma mark - Editing Buttons
 
+/* Not yet implemented
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -241,6 +283,7 @@
 //Make cells slidable for actions
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
+*/
 
 #pragma mark - Section Header
 
