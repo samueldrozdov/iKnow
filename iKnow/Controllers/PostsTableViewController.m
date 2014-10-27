@@ -6,11 +6,18 @@
 //  Copyright (c) 2014 MoonAnimals. All rights reserved.
 //
 
+// Header
 #import "PostsTableViewController.h"
 
+// Data
 #import "DataManager.h"
+
+// Utility
 #import "IKColor.h"
 #import "UIImage-JTColor.h"
+
+// Custom Cells
+#import "PostTableViewCell.h"
 
 @interface PostsTableViewController ()
 
@@ -29,11 +36,15 @@
     {
         category = c;
         dataManager = [DataManager sharedManager];
-        
-        NSString *placeHolder = [NSString stringWithFormat:@"Loading data for %@...",category[@"title"]];
-        posts = @[@{ @"Content": placeHolder}];
+        posts = @[];
     }
     return self;
+}
+
+- (void)registerCells
+{
+    UINib *postCell = [UINib nibWithNibName:@"PostTableViewCell" bundle:[NSBundle mainBundle]];
+    [self.tableView registerNib:postCell forCellReuseIdentifier:@"PostCell"];
 }
 
 - (void)viewDidLoad {
@@ -47,6 +58,7 @@
     }];
     
     [self setupNavigation];
+    [self registerCells];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -112,19 +124,46 @@
     return posts.count;
 }
 
+- (NSString*)dateStringFromDate:(NSDate*)date
+{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSInteger day = [components day];
+    NSInteger month = [components month];
+    NSString *dayStr = nil, *monthStr = nil;
+    if (day < 10) {
+        dayStr = [NSString stringWithFormat:@"0%ld",(long)day,nil];
+    } else {
+        dayStr = [NSString stringWithFormat:@"%ld",(long)day,nil];
+    }
+    if (month < 10) {
+        monthStr = [NSString stringWithFormat:@"0%ld",(long)month,nil];
+    } else {
+        monthStr = [NSString stringWithFormat:@"%ld",(long)month,nil];
+    }
+    return [NSString stringWithFormat:@"%@/%@",monthStr,dayStr,nil];
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyIdentifier"];
+    PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MyIdentifier"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor clearColor];
+        cell = [[PostTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"PostCell"];
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
+    
+    cell.dateLabel.textColor = [IKColor lightTextColor];
+    cell.contentLabel.textColor = [IKColor lightTextColor];
+    cell.dividerView.backgroundColor = [IKColor lightTextColor];
 
-    NSDictionary *item = (NSDictionary *)[posts objectAtIndex:indexPath.row];
-    cell.textLabel.text = [item objectForKey:@"Content"];
-
+    PFObject *item = (PFObject *)[posts objectAtIndex:indexPath.row];
+    cell.contentLabel.text = item[@"Content"];
+    
+    NSDate *updatedAt = item.updatedAt;
+    cell.dateLabel.text = [self dateStringFromDate:updatedAt];
+    
     return cell;
 }
 

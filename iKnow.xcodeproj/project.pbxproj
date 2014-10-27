@@ -46,6 +46,8 @@
 		9FFD314219FDDC0600E0C0E0 /* IKColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFD314119FDDC0600E0C0E0 /* IKColor.m */; };
 		9FFD314819FDDDA500E0C0E0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 9FFD314519FDDDA500E0C0E0 /* LICENSE */; };
 		9FFD314919FDDDA500E0C0E0 /* UIImage-JTColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFD314719FDDDA500E0C0E0 /* UIImage-JTColor.m */; };
+		9FFD315019FDF7A300E0C0E0 /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFD314E19FDF7A300E0C0E0 /* PostTableViewCell.m */; };
+		9FFD315119FDF7A300E0C0E0 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FFD314F19FDF7A300E0C0E0 /* PostTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +117,9 @@
 		9FFD314519FDDDA500E0C0E0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		9FFD314619FDDDA500E0C0E0 /* UIImage-JTColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage-JTColor.h"; sourceTree = "<group>"; };
 		9FFD314719FDDDA500E0C0E0 /* UIImage-JTColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage-JTColor.m"; sourceTree = "<group>"; };
+		9FFD314D19FDF7A300E0C0E0 /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostTableViewCell.h; path = "Custom Cells/PostTableViewCell.h"; sourceTree = "<group>"; };
+		9FFD314E19FDF7A300E0C0E0 /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostTableViewCell.m; path = "Custom Cells/PostTableViewCell.m"; sourceTree = "<group>"; };
+		9FFD314F19FDF7A300E0C0E0 /* PostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PostTableViewCell.xib; path = "Custom Cells/PostTableViewCell.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +178,7 @@
 		41A9182619FB446000C4C08A /* iKnow */ = {
 			isa = PBXGroup;
 			children = (
+				9FFD314C19FDF77E00E0C0E0 /* Custom Cells */,
 				9F5978B119FC3C0600384C5D /* Views */,
 				9F5978AD19FC3B9100384C5D /* Controllers */,
 				9F59788619FC21FB00384C5D /* Models */,
@@ -363,6 +369,16 @@
 			path = "UIImage-JTColor";
 			sourceTree = "<group>";
 		};
+		9FFD314C19FDF77E00E0C0E0 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9FFD314D19FDF7A300E0C0E0 /* PostTableViewCell.h */,
+				9FFD314E19FDF7A300E0C0E0 /* PostTableViewCell.m */,
+				9FFD314F19FDF7A300E0C0E0 /* PostTableViewCell.xib */,
+			);
+			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -456,6 +472,7 @@
 				9F5978D519FD626A00384C5D /* PostsTableViewController.xib in Resources */,
 				9F5978C719FC9EDA00384C5D /* AddPostViewController.xib in Resources */,
 				9F5978BD19FC3C3E00384C5D /* login-button-small.png in Resources */,
+				9FFD315119FDF7A300E0C0E0 /* PostTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41F9904119FC28F7001046D1 /* MainCellNib.m in Sources */,
+				9FFD315019FDF7A300E0C0E0 /* PostTableViewCell.m in Sources */,
 				41A9183019FB446000C4C08A /* iKnow.xcdatamodeld in Sources */,
 				9F59788219FC1EB500384C5D /* DataManager.m in Sources */,
 				9F5978C219FC6A2A00384C5D /* IKCategories.m in Sources */,
