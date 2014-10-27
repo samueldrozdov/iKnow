@@ -10,12 +10,14 @@
 #import "DataManager.h"
 #import "DataConstants.h"
 #import "IKColor.h"
+#import "AutocompleteTableViewManager.h"
 
 @interface AddPostViewController ()
 
 - (IBAction)backButtonClicked:(id)sender;
 - (IBAction)doneButtonClicked:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *postTextField;
+@property (weak, nonatomic) IBOutlet UITableView *suggestionTableView;
 
 @end
 
@@ -23,6 +25,7 @@
 {
     NSDictionary *category;
     DataManager *dataManager;
+    AutocompleteTableViewManager *autocompleteTableViewManager;
 }
 
 - (void)viewDidLoad {
@@ -32,6 +35,10 @@
     self.view.backgroundColor = category[@"color"];
     self.postTextField.placeholder = category[@"title"];
     self.postTextField.textColor = [IKColor lightTextColor];
+    
+    self.suggestionTableView.delegate = autocompleteTableViewManager;
+    self.suggestionTableView.dataSource = autocompleteTableViewManager;
+    self.suggestionTableView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,6 +52,7 @@
     {
         category = c;
         dataManager = [DataManager sharedManager];
+        autocompleteTableViewManager = [[AutocompleteTableViewManager alloc] init];
     }
     return self;
 }

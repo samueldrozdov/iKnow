@@ -48,6 +48,7 @@
 		9FFD314919FDDDA500E0C0E0 /* UIImage-JTColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFD314719FDDDA500E0C0E0 /* UIImage-JTColor.m */; };
 		9FFD315019FDF7A300E0C0E0 /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFD314E19FDF7A300E0C0E0 /* PostTableViewCell.m */; };
 		9FFD315119FDF7A300E0C0E0 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FFD314F19FDF7A300E0C0E0 /* PostTableViewCell.xib */; };
+		9FFD315519FE1CAC00E0C0E0 /* AutocompleteTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFD315419FE1CAC00E0C0E0 /* AutocompleteTableViewManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,8 @@
 		9FFD314D19FDF7A300E0C0E0 /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostTableViewCell.h; path = "Custom Cells/PostTableViewCell.h"; sourceTree = "<group>"; };
 		9FFD314E19FDF7A300E0C0E0 /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostTableViewCell.m; path = "Custom Cells/PostTableViewCell.m"; sourceTree = "<group>"; };
 		9FFD314F19FDF7A300E0C0E0 /* PostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PostTableViewCell.xib; path = "Custom Cells/PostTableViewCell.xib"; sourceTree = "<group>"; };
+		9FFD315319FE1CAC00E0C0E0 /* AutocompleteTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutocompleteTableViewManager.h; path = Util/AutocompleteTableViewManager.h; sourceTree = "<group>"; };
+		9FFD315419FE1CAC00E0C0E0 /* AutocompleteTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AutocompleteTableViewManager.m; path = Util/AutocompleteTableViewManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +237,8 @@
 				9F5978C119FC6A2A00384C5D /* IKCategories.m */,
 				9FFD314019FDDC0600E0C0E0 /* IKColor.h */,
 				9FFD314119FDDC0600E0C0E0 /* IKColor.m */,
+				9FFD315319FE1CAC00E0C0E0 /* AutocompleteTableViewManager.h */,
+				9FFD315419FE1CAC00E0C0E0 /* AutocompleteTableViewManager.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 		9F5978B419FC3C2900384C5D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9FFD315219FE1AAB00E0C0E0 /* Text */,
 				9F5978B519FC3C2E00384C5D /* Images */,
 			);
 			name = Resources;
@@ -377,6 +383,13 @@
 				9FFD314F19FDF7A300E0C0E0 /* PostTableViewCell.xib */,
 			);
 			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		9FFD315219FE1AAB00E0C0E0 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Text;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -491,6 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41F9904119FC28F7001046D1 /* MainCellNib.m in Sources */,
+				9FFD315519FE1CAC00E0C0E0 /* AutocompleteTableViewManager.m in Sources */,
 				9FFD315019FDF7A300E0C0E0 /* PostTableViewCell.m in Sources */,
 				41A9183019FB446000C4C08A /* iKnow.xcdatamodeld in Sources */,
 				9F59788219FC1EB500384C5D /* DataManager.m in Sources */,
