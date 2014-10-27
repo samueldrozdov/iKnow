@@ -29,19 +29,19 @@
     {
         categories = [@[
                         [@{
-                            @"key": @"fact",
-                            @"title": @"An Interesting Fact",
+                            @"key": @"food",
+                            @"title": @"A Tasty Food",
                             @"color": [UIColor colorWithRed:46/255.0 green:204/255.0 blue:113/255.0 alpha:1.0f],
                             @"history": [@[] mutableCopy],
                             @"index": @0
                             } mutableCopy],
                         [@{
-                            @"key": @"quote",
-                            @"title": @"A Cool Quote",
-                            @"color": [UIColor colorWithRed:231/255.0 green:76/255.0 blue:60/255.0 alpha:1.0],
-                            @"history": [@[] mutableCopy],
-                            @"index": @0
-                            } mutableCopy],
+                           @"key": @"ph",
+                           @"title": @"That Sweet Product",
+                           @"color": [UIColor colorWithRed:231/255.0 green:76/255.0 blue:60/255.0 alpha:1.0],
+                           @"history": [@[] mutableCopy],
+                           @"index": @0
+                           } mutableCopy],
                         [@{
                             @"key": @"vocab",
                             @"title": @"A SAT Word",
