@@ -28,7 +28,6 @@
 		9F5978A219FC278E00384C5D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5978A119FC278E00384C5D /* Security.framework */; };
 		9F5978A419FC279400384C5D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5978A319FC279400384C5D /* StoreKit.framework */; };
 		9F5978A619FC279C00384C5D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5978A519FC279C00384C5D /* SystemConfiguration.framework */; };
-		9F5978AC19FC33F200384C5D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5978AA19FC33F200384C5D /* FacebookSDK.framework */; };
 		9F5978B019FC3BE900384C5D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5978AF19FC3BE900384C5D /* LoginViewController.m */; };
 		9F5978B319FC3C1000384C5D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978B219FC3C1000384C5D /* LoginViewController.xib */; };
 		9F5978BB19FC3C3E00384C5D /* login-button-small-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5978B719FC3C3E00384C5D /* login-button-small-pressed.png */; };
@@ -46,6 +45,7 @@
 		9FFD314219FDDC0600E0C0E0 /* IKColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFD314119FDDC0600E0C0E0 /* IKColor.m */; };
 		9FFD314819FDDDA500E0C0E0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 9FFD314519FDDDA500E0C0E0 /* LICENSE */; };
 		9FFD314919FDDDA500E0C0E0 /* UIImage-JTColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFD314719FDDDA500E0C0E0 /* UIImage-JTColor.m */; };
+		9FFD314B19FDE1FD00E0C0E0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FFD314A19FDE1FD00E0C0E0 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,7 +90,6 @@
 		9F5978A119FC278E00384C5D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9F5978A319FC279400384C5D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9F5978A519FC279C00384C5D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		9F5978AA19FC33F200384C5D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		9F5978AE19FC3BE900384C5D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		9F5978AF19FC3BE900384C5D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		9F5978B219FC3C1000384C5D /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -115,6 +114,7 @@
 		9FFD314519FDDDA500E0C0E0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		9FFD314619FDDDA500E0C0E0 /* UIImage-JTColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage-JTColor.h"; sourceTree = "<group>"; };
 		9FFD314719FDDDA500E0C0E0 /* UIImage-JTColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage-JTColor.m"; sourceTree = "<group>"; };
+		9FFD314A19FDE1FD00E0C0E0 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +135,7 @@
 				9F59789819FC276C00384C5D /* CoreGraphics.framework in Frameworks */,
 				9F59789619FC275000384C5D /* CFNetwork.framework in Frameworks */,
 				9F59789419FC274600384C5D /* AudioToolbox.framework in Frameworks */,
-				9F5978AC19FC33F200384C5D /* FacebookSDK.framework in Frameworks */,
+				9FFD314B19FDE1FD00E0C0E0 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +290,7 @@
 		9F5978A819FC33E200384C5D /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
-				9F5978AA19FC33F200384C5D /* FacebookSDK.framework */,
+				9FFD314A19FDE1FD00E0C0E0 /* FacebookSDK.framework */,
 			);
 			name = Facebook;
 			sourceTree = "<group>";
