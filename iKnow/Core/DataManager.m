@@ -27,12 +27,14 @@
 
 - (PFObject*)parsePostDictionary:(NSDictionary*)data
 {
+    PFUser *user = [PFUser currentUser];
+    
     PFObject *post = [PFObject objectWithClassName:IKPost];
-    post[IKPostUser] = [PFUser user];
+    post[IKPostUser] = user;
     post[IKPostCategory] = data[IKPostCategory];
     post[IKPostContent] = data[IKPostContent];
     
-    PFACL *postACL = [PFACL ACLWithUser:[PFUser currentUser]];
+    PFACL *postACL = [PFACL ACLWithUser:user];
     [postACL setPublicReadAccess:NO];
     post.ACL = postACL;
     
@@ -43,8 +45,11 @@
 
 - (void)postData:(NSDictionary*)data withBlock:(void (^)(NSError *err, NSString *objectId))callback
 {
+    NSLog(@"saving data");
     PFObject *post = [self parsePostDictionary:data];
+    NSLog(@"data: %@", post.description);
     [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        NSLog(@"data saved");
         if (succeeded) {
             callback(nil, post.objectId);
         } else {

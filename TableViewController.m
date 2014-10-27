@@ -11,6 +11,7 @@
 
 #import "LoginViewController.h"
 #import "AddPostViewController.h"
+#import "PostsTableViewController.h"
 #import "IKCategories.h"
 
 @interface TableViewController ()
@@ -83,11 +84,11 @@
     } else {
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedRight:)];
         [swipeRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
-        [self.view addGestureRecognizer:swipeRight];
+        [cell addGestureRecognizer:swipeRight];
         
         UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedLeft:)];
         [swipeLeft setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-        [self.view addGestureRecognizer:swipeLeft];
+        [cell addGestureRecognizer:swipeLeft];
         
         //Category cell
         [cell setTag:indexPath.row];
@@ -120,6 +121,7 @@
 
     CGPoint location = [gesture locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
+    NSDictionary *category = categories[swipedIndexPath.row];
     MainCellNib *cell  = (MainCellNib*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     [UIView animateWithDuration:0.3 animations:^{
         [cell setFrame:CGRectMake(cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
@@ -129,6 +131,10 @@
                 [cell setFrame:CGRectMake(-cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
             } completion:^(BOOL finished){
                 if(finished) {
+                    
+                    AddPostViewController *apvc = [[AddPostViewController alloc] initWithCategory:category];
+                    [self presentViewController:apvc animated:YES completion:nil];
+                    
                     [UIView animateWithDuration:0.3 animations:^{
                         [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
                     }];
@@ -143,6 +149,7 @@
 
     CGPoint location = [gesture locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
+    NSDictionary *category = categories[swipedIndexPath.row];
     MainCellNib *cell  = (MainCellNib*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     
     [UIView animateWithDuration:0.3 animations:^{
@@ -152,8 +159,12 @@
             [UIView animateWithDuration:0 animations:^{
                 [cell setFrame:CGRectMake(cell.frame.size.width*5/4, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
             } completion:^(BOOL finished){
-                
                 if(finished) {
+                    
+                    PostsTableViewController *ptvc = [[PostsTableViewController alloc] initWithCategory:category];
+                    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:ptvc];
+                    [self presentViewController:nvc animated:YES completion:nil];
+                
                     [UIView animateWithDuration:0.3 animations:^{
                         [cell setFrame:CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height)];
                     }];
