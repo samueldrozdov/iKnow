@@ -10,6 +10,6 @@
 
 @interface MainCellNib : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UITextView *mainTextView;
+@property (weak, nonatomic) IBOutlet UILabel *mainTextLabel;
 
 @end

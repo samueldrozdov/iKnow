@@ -274,16 +274,16 @@
 		9F59788D19FC244B00384C5D /* System Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9F5978A519FC279C00384C5D /* SystemConfiguration.framework */,
-				9F5978A319FC279400384C5D /* StoreKit.framework */,
-				9F5978A119FC278E00384C5D /* Security.framework */,
-				9F59789F19FC278800384C5D /* QuartzCore.framework */,
-				9F59789D19FC278300384C5D /* MobileCoreServices.framework */,
-				9F59789B19FC277C00384C5D /* libz.dylib */,
-				9F59789919FC277400384C5D /* CoreLocation.framework */,
-				9F59789719FC276C00384C5D /* CoreGraphics.framework */,
-				9F59789519FC275000384C5D /* CFNetwork.framework */,
 				9F59789319FC274600384C5D /* AudioToolbox.framework */,
+				9F59789519FC275000384C5D /* CFNetwork.framework */,
+				9F59789719FC276C00384C5D /* CoreGraphics.framework */,
+				9F59789919FC277400384C5D /* CoreLocation.framework */,
+				9F59789B19FC277C00384C5D /* libz.dylib */,
+				9F59789D19FC278300384C5D /* MobileCoreServices.framework */,
+				9F59789F19FC278800384C5D /* QuartzCore.framework */,
+				9F5978A119FC278E00384C5D /* Security.framework */,
+				9F5978A319FC279400384C5D /* StoreKit.framework */,
+				9F5978A519FC279C00384C5D /* SystemConfiguration.framework */,
 			);
 			name = "System Frameworks";
 			sourceTree = "<group>";

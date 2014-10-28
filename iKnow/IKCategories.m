@@ -28,41 +28,42 @@
     if (self = [super init])
     {
         categories = [@[
+//                        [@{
+//                            @"key": @"food",
+//                            @"title": @"A Tasty Food",
+//                            @"color": [UIColor colorWithRed:46/255.0 green:204/255.0 blue:113/255.0 alpha:1.0f],
+//                            @"history": [@[] mutableCopy],
+//                            @"index": @0
+//                            } mutableCopy],
+                        
                         [@{
-                            @"key": @"food",
-                            @"title": @"A Tasty Food",
-                            @"color": [UIColor colorWithRed:46/255.0 green:204/255.0 blue:113/255.0 alpha:1.0f],
-                            @"history": [@[] mutableCopy],
-                            @"index": @0
-                            } mutableCopy],
-                        [@{
-                           @"key": @"ph",
-                           @"title": @"That Sweet Product",
-                           @"color": [UIColor colorWithRed:231/255.0 green:76/255.0 blue:60/255.0 alpha:1.0],
+                           @"key": @"vocab",
+                           @"title": @"Word",
+                           @"color": [UIColor colorWithRed:52/255.0 green:152/255.0 blue:219/255.0 alpha:1.0],
                            @"history": [@[] mutableCopy],
                            @"index": @0
                            } mutableCopy],
                         [@{
-                            @"key": @"vocab",
-                            @"title": @"A SAT Word",
-                            @"color": [UIColor colorWithRed:52/255.0 green:152/255.0 blue:219/255.0 alpha:1.0],
-                            @"history": [@[] mutableCopy],
-                            @"index": @0
-                            } mutableCopy],
+                           @"key": @"ph",
+                           @"title": @"Product",
+                           @"color": [UIColor colorWithRed:218/255.0 green:85/255.0 blue:47/255.0 alpha:1.0],
+                           @"history": [@[] mutableCopy],
+                           @"index": @0
+                           } mutableCopy],
                         [@{
-                            @"key": @"person",
-                            @"title": @"That Person's Name",
-                            @"color": [UIColor colorWithRed:230/255.0 green:126/255.0 blue:35/255.0 alpha:1.0],
-                            @"history": [@[] mutableCopy],
-                            @"index": @0
-                            } mutableCopy],
-                        [@{
-                            @"key": @"song",
-                            @"title": @"A Nice Song",
-                            @"color": [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182/255.0 alpha:1.0],
-                            @"history": [@[] mutableCopy],
-                            @"index": @0
-                            } mutableCopy]
+                           @"key": @"song",
+                           @"title": @"Song",
+                           @"color": [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182/255.0 alpha:1.0],
+                           @"history": [@[] mutableCopy],
+                           @"index": @0
+                           } mutableCopy]
+//                        [@{
+//                            @"key": @"person",
+//                            @"title": @"That Person's Name",
+//                            @"color": [UIColor colorWithRed:230/255.0 green:126/255.0 blue:35/255.0 alpha:1.0],
+//                            @"history": [@[] mutableCopy],
+//                            @"index": @0
+//                            } mutableCopy],
                        ] mutableCopy];
     }
     return self;

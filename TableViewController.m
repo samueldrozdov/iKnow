@@ -62,25 +62,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainCellNib *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MainCell" forIndexPath:indexPath];
-    cell.mainTextView.font = [UIFont fontWithName:@"Helvetica Bold" size:30];
-    [cell.mainTextView setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.7]];
-    [cell.mainTextView setTextAlignment:NSTextAlignmentCenter];
+//    cell.mainTextLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:30];
+    [cell.mainTextLabel setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.7]];
+    [cell.mainTextLabel setTextAlignment:NSTextAlignmentCenter];
     
     //add tags as identifiers of the cells row
     [cell setTag:indexPath.row];
-    [cell.mainTextView setTag:indexPath.row];
+    [cell.mainTextLabel setTag:indexPath.row];
 
-    cell.mainTextView.editable = NO;
-    cell.mainTextView.userInteractionEnabled = NO;
+    cell.mainTextLabel.userInteractionEnabled = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.mainTextView.font = [UIFont fontWithName:@"Helvetica Bold" size:40];
+    cell.mainTextLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:40];
 
     if([categories count] == indexPath.row) {
-        cell.mainTextView.text = @"Logout";
+        cell.mainTextLabel.text = @"Logout";
         
         UIColor *bgColor = [UIColor colorWithRed:241/255.0 green:196/255.0 blue:15/255.0 alpha:0.9];
         [cell setBackgroundColor:bgColor];
-        [cell.mainTextView setBackgroundColor:bgColor];
+        [cell.mainTextLabel setBackgroundColor:bgColor];
     } else {
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedRight:)];
         [swipeRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
@@ -93,15 +92,15 @@
         //Category cell
         [cell setTag:indexPath.row];
         [cell setBackgroundColor:categories[indexPath.row][@"color"]];
-        [cell.mainTextView setBackgroundColor:categories[indexPath.row][@"color"]];
-        cell.mainTextView.text = categories[indexPath.row][@"title"];
+        [cell.mainTextLabel setBackgroundColor:categories[indexPath.row][@"color"]];
+        cell.mainTextLabel.text = categories[indexPath.row][@"title"];
     }
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.view.frame.size.height/5;
+    return self.view.frame.size.height/3;
 }
 
 -(void)logoutMethod {
